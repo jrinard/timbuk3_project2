@@ -11,8 +11,25 @@
     <body>
       <nav class="navbar custom-navbar">
         <span class="logo"> TIMBUK3</span>
-        <%= link_to "Home", products_path, :class => 'navbar-brand' %>
+        <%= link_to "Home", '/', :class => 'navbar-brand' %> <!-- need to route home -->
+        <%= link_to "All Products", products_path, :class => 'navbar-brand' %>
         <%= link_to "Add Product", new_product_path, :class => 'navbar-brand' %>
+
+        <div class="pull-right login">
+        <% if current_user %>
+          <ul>
+            <li><%= current_user.email %></li>
+            <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+          </ul>
+        <% else %>
+          <ul>
+            <li><%= link_to "Login", 'login' %></a></li>
+            <li><%= link_to "Signup", 'signup' %></a></li>
+          </ul>
+        <% end %>
+      </div>
+
+
       </nav>
       <div class="alert-success"><%= flash[:notice] %></div>
       <%= yield %>
